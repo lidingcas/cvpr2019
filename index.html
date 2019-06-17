@@ -34,8 +34,9 @@
       
       // Convert RGBA input frame to BGR:
       cv.cvtColor(frame, frameBGR, cv.COLOR_RGBA2BGR);
-      
       var blob = cv.blobFromImage(frameBGR, 1, {width: 192, height: 144}, [104, 117, 123, 0]);
+      
+      // Put input blob to the network and do forward pass
       net.setInput(blob);
       var out = net.forward();
       
@@ -50,6 +51,7 @@
         cv.rectangle(frame, {x: left, y: top}, {x: right, y: bottom}, [0, 255, 0, 255]);
       }
       
+      // don't forget
       blob.delete();
       out.delete();
 
